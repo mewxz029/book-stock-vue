@@ -7,10 +7,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     books: [],
+    message: "",
   },
   mutations: {
     setBooks(state, data) {
       state.books = data;
+    },
+    setMessage(state, data) {
+      state.message = data;
     },
   },
   actions: {
@@ -22,7 +26,16 @@ export default new Vuex.Store({
       context.commit("setBooks", data);
     },
     async createBook(context, payload) {
-      await axios.post("https://newbookstockapi.herokuapp.com/book", payload);
+      await axios
+        .post("https://newbookstockapi.herokuapp.com/book", payload)
+        .then((res) => {
+          context.commit("setMessage", "เพิ่มหนังสือสำเร็จ");
+          console.log("เพิ่มหนังสือสำเร็จ " + res.status);
+        })
+        .catch((error) => {
+          context.commit("setMessage", "เพิ่มหนังสือไม่สำเร็จ");
+          console.log("เพิ่มหนังสือไม่สำเร็จ " + error);
+        });
     },
     async updateBook(context, id, payload) {
       await axios.put(

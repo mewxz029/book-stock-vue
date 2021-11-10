@@ -95,6 +95,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "form-book",
   data() {
@@ -114,6 +116,11 @@ export default {
     createBook() {
       this.$store.dispatch("createBook", this.payload);
     },
+  },
+  computed: {
+    ...mapState({
+      message: (state) => state.message,
+    }),
   },
 };
 </script>
