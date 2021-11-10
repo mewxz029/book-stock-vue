@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar elevation-4 light>
-      <router-link to="/" exact="active" class="text-decoration-none">
+      <router-link to="/" exact class="text-decoration-none">
         <v-toolbar-title class="headline">จัดการสต็อก</v-toolbar-title>
       </router-link>
       <v-spacer></v-spacer>
