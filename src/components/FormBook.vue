@@ -9,22 +9,26 @@
               label="ชื่อหนังสือ"
               required
               outlined
+              v-model="payload.title"
               prepend-icon="mdi-notebook-outline"
             ></v-text-field>
             <v-text-field
               label="ประเภทหนังสือ"
               required
               outlined
+              v-model="payload.category"
               prepend-icon="mdi-bookmark-multiple-outline"
             ></v-text-field>
             <v-textarea
               label="รายละเอียด"
               outlined
+              v-model="payload.desc"
               prepend-icon="mdi-comment-bookmark-outline"
             ></v-textarea>
             <v-text-field
               label="URL รูปภาพ"
               outlined
+              v-model="payload.imgUrl"
               prepend-icon="mdi-file-image-outline"
             ></v-text-field>
             <v-row>
@@ -35,7 +39,7 @@
                   outlined
                   prepend-icon="mdi-storefront-outline"
                   type="number"
-                  value="0"
+                  v-model="payload.stock"
                 ></v-text-field>
               </v-col>
               <v-col>
@@ -45,13 +49,32 @@
                   outlined
                   prepend-icon="mdi-currency-usd"
                   type="number"
-                  value="0"
+                  v-model="payload.price"
                 ></v-text-field>
               </v-col>
             </v-row>
-            <v-btn elevation-1 color="success" block x-large class="mt-3">
+            <v-btn
+              elevation-1
+              color="success"
+              block
+              x-large
+              class="mt-3"
+              v-if="actionBook === 'ADD_BOOK'"
+              @click="createBook"
+            >
               <v-icon left>mdi-book-plus-outline</v-icon>
               เพิ่มหนังสือใหม่
+            </v-btn>
+            <v-btn
+              elevation-1
+              color="success"
+              block
+              x-large
+              class="mt-3"
+              v-else-if="actionBook === 'EDIT_BOOK'"
+            >
+              <v-icon left>mdi-book-plus-outline</v-icon>
+              แก้ไขหนังสือ
             </v-btn>
             <v-btn
               elevation-1
@@ -74,5 +97,23 @@
 <script>
 export default {
   name: "form-book",
+  data() {
+    return {
+      payload: {
+        title: "",
+        category: "",
+        desc: "",
+        imgUrl: "",
+        stock: 0,
+        price: 0,
+      },
+    };
+  },
+  props: { actionBook: String },
+  methods: {
+    createBook() {
+      this.$store.dispatch("createBook", this.payload);
+    },
+  },
 };
 </script>

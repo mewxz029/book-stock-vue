@@ -1,5 +1,5 @@
 <template>
-  <form-book />
+  <form-book actionBook="ADD_BOOK" />
 </template>
 
 <script>
