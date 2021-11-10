@@ -29,8 +29,16 @@
             <div class="des d-flex">
               <p class="text-truncate">{{ item.desc }}</p>
             </div>
-            <p>
-              จำนวนคงเหลือ : <v-chip>{{ item.stock }}</v-chip>
+            <p v-if="item.stock > 19">
+              จำนวนคงเหลือ :
+              <v-chip color="green" dark>{{ item.stock }}</v-chip>
+            </p>
+            <p v-else-if="item.stock > 9">
+              จำนวนคงเหลือ :
+              <v-chip color="orange" dark>{{ item.stock }}</v-chip>
+            </p>
+            <p v-else>
+              จำนวนคงเหลือ : <v-chip color="red" dark>{{ item.stock }}</v-chip>
             </p>
           </v-card-text>
         </v-card>
