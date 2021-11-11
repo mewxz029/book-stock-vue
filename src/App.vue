@@ -25,6 +25,7 @@ export default {
 
 <style>
 main {
+  margin-top: 64px;
   background: #fbe9e7;
 }
 </style>

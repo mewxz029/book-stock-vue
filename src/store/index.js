@@ -21,15 +21,6 @@ export default new Vuex.Store({
       const data = result.data.data;
       context.commit("setBooks", data);
     },
-    async updateBook(context, id, payload) {
-      await axios.put(
-        `https://newbookstockapi.herokuapp.com/book/${id}`,
-        payload
-      );
-    },
-    async deleteBook(context, id) {
-      await axios.delete(`https://newbookstockapi.herokuapp.com/book/${id}`);
-    },
   },
   modules: {},
 });
