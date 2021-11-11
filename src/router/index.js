@@ -34,6 +34,11 @@ const routes = [
     name: "ShowBook",
     component: ShowBook,
   },
+  {
+    path: "*",
+    name: "notFound",
+    component: () => import("../views/NotFound.vue"),
+  },
 ];
 
 const router = new VueRouter({
