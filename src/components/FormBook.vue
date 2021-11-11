@@ -95,7 +95,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "form-book",
@@ -109,18 +110,31 @@ export default {
         stock: 0,
         price: 0,
       },
+      status: "",
     };
   },
   props: { actionBook: String },
   methods: {
-    createBook() {
-      this.$store.dispatch("createBook", this.payload);
+    async createBook() {
+      try {
+        const result = await axios.post(
+          "https://newbookstockapi.herokuapp.com/book",
+          this.payload
+        );
+        await this.$router.push("/");
+        await Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "เพิ่มหนังสือสำเร็จ",
+          showConfirmButton: true,
+        });
+        this.status = result.status;
+      } catch (error) {
+        this.status = error;
+        console.log(error);
+      }
+      this.status = "";
     },
-  },
-  computed: {
-    ...mapState({
-      message: (state) => state.message,
-    }),
   },
 };
 </script>
